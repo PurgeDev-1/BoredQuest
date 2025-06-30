@@ -18,5 +18,5 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: true,
   },
-  base: '/RealmQuest/',
+  base: process.env.NODE_ENV === 'production' ? '/RealmQuest/' : '/',
 }) 

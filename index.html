@@ -12,6 +12,32 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              fantasy: {
+                gold: '#ffd700',
+                silver: '#c0c0c0',
+                bronze: '#cd7f32',
+                magic: '#8a2be2',
+                fire: '#ff4500',
+                ice: '#00bfff',
+                nature: '#228b22',
+              }
+            },
+            fontFamily: {
+              fantasy: ['Cinzel', 'serif'],
+              game: ['Orbitron', 'monospace'],
+            }
+          }
+        }
+      }
+    </script>
+    
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="RealmQuest - Fantasy MMORPG" />
     <meta property="og:description" content="Embark on epic adventures in RealmQuest, a browser-based fantasy MMORPG filled with magic, monsters, and treasures." />
@@ -25,8 +51,268 @@
     <meta name="twitter:description" content="Embark on epic adventures in RealmQuest, a browser-based fantasy MMORPG filled with magic, monsters, and treasures." />
     <meta name="twitter:image" content="/og-image.png" />
   </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+  <body class="bg-gray-900 text-white font-game">
+    <div id="app">
+      <!-- Home Page -->
+      <div id="home-page" class="min-h-screen flex items-center justify-center">
+        <div class="text-center max-w-4xl mx-auto px-4">
+          <h1 class="text-7xl font-fantasy text-fantasy-gold mb-6 text-shadow">
+            RealmQuest
+          </h1>
+          <p class="text-2xl text-gray-300 mb-8">
+            Embark on epic adventures in a mystical realm filled with magic, monsters, and treasures
+          </p>
+          
+          <div class="grid md:grid-cols-3 gap-8 mb-12">
+            <div class="bg-gray-800 border border-gray-700 rounded-lg p-4">
+              <h3 class="text-xl font-fantasy text-fantasy-gold mb-4">Real-time Multiplayer</h3>
+              <p class="text-gray-300">Play with friends and other adventurers in real-time combat and exploration</p>
+            </div>
+            
+            <div class="bg-gray-800 border border-gray-700 rounded-lg p-4">
+              <h3 class="text-xl font-fantasy text-fantasy-gold mb-4">Character Progression</h3>
+              <p class="text-gray-300">Level up, gain skills, and become more powerful through epic battles</p>
+            </div>
+            
+            <div class="bg-gray-800 border border-gray-700 rounded-lg p-4">
+              <h3 class="text-xl font-fantasy text-fantasy-gold mb-4">Dungeon Crawling</h3>
+              <p class="text-gray-300">Explore procedurally generated dungeons with unique challenges and rewards</p>
+            </div>
+          </div>
+
+          <div class="space-x-4">
+            <button 
+              onclick="showPage('login')"
+              class="bg-gradient-to-r from-fantasy-gold to-fantasy-bronze text-black font-bold py-2 px-4 rounded-lg hover:from-fantasy-bronze hover:to-fantasy-gold transition-all duration-300"
+            >
+              Login
+            </button>
+            <button 
+              onclick="showPage('register')"
+              class="bg-gradient-to-r from-gray-600 to-gray-700 text-white font-bold py-2 px-4 rounded-lg hover:from-gray-500 hover:to-gray-600 transition-all duration-300"
+            >
+              Register
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Login Page -->
+      <div id="login-page" class="min-h-screen flex items-center justify-center hidden">
+        <div class="bg-gray-800 border border-gray-700 rounded-lg p-6 max-w-md w-full">
+          <h2 class="text-3xl font-fantasy text-fantasy-gold mb-6 text-center">
+            Login to RealmQuest
+          </h2>
+          
+          <form onsubmit="handleLogin(event)" class="space-y-4">
+            <div>
+              <label class="block text-gray-300 mb-2">Username</label>
+              <input
+                type="text"
+                id="login-username"
+                class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-fantasy-gold focus:outline-none"
+                required
+              />
+            </div>
+            
+            <div>
+              <label class="block text-gray-300 mb-2">Password</label>
+              <input
+                type="password"
+                id="login-password"
+                class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-fantasy-gold focus:outline-none"
+                required
+              />
+            </div>
+            
+            <button
+              type="submit"
+              class="w-full bg-gradient-to-r from-fantasy-gold to-fantasy-bronze text-black font-bold py-2 px-4 rounded-lg hover:from-fantasy-bronze hover:to-fantasy-gold transition-all duration-300"
+            >
+              Login
+            </button>
+          </form>
+          
+          <button 
+            onclick="showPage('home')"
+            class="w-full mt-4 bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-500 transition-all duration-300"
+          >
+            Back to Home
+          </button>
+        </div>
+      </div>
+
+      <!-- Register Page -->
+      <div id="register-page" class="min-h-screen flex items-center justify-center hidden">
+        <div class="bg-gray-800 border border-gray-700 rounded-lg p-6 max-w-md w-full">
+          <h2 class="text-3xl font-fantasy text-fantasy-gold mb-6 text-center">
+            Join RealmQuest
+          </h2>
+          
+          <form onsubmit="handleRegister(event)" class="space-y-4">
+            <div>
+              <label class="block text-gray-300 mb-2">Username</label>
+              <input
+                type="text"
+                id="register-username"
+                class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-fantasy-gold focus:outline-none"
+                required
+              />
+            </div>
+            
+            <div>
+              <label class="block text-gray-300 mb-2">Email</label>
+              <input
+                type="email"
+                id="register-email"
+                class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-fantasy-gold focus:outline-none"
+                required
+              />
+            </div>
+            
+            <div>
+              <label class="block text-gray-300 mb-2">Password</label>
+              <input
+                type="password"
+                id="register-password"
+                class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-fantasy-gold focus:outline-none"
+                required
+              />
+            </div>
+            
+            <button
+              type="submit"
+              class="w-full bg-gradient-to-r from-fantasy-gold to-fantasy-bronze text-black font-bold py-2 px-4 rounded-lg hover:from-fantasy-bronze hover:to-fantasy-gold transition-all duration-300"
+            >
+              Create Account
+            </button>
+          </form>
+          
+          <button 
+            onclick="showPage('home')"
+            class="w-full mt-4 bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-500 transition-all duration-300"
+          >
+            Back to Home
+          </button>
+        </div>
+      </div>
+
+      <!-- Game Page -->
+      <div id="game-page" class="min-h-screen hidden">
+        <header class="bg-gray-800 border-b border-gray-700">
+          <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+              <h1 class="text-2xl font-fantasy text-fantasy-gold">
+                RealmQuest
+              </h1>
+              <div class="flex items-center space-x-4">
+                <span id="player-name" class="text-gray-300"></span>
+                <button
+                  onclick="handleLogout()"
+                  class="bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-500 transition-all duration-300"
+                >
+                  Logout
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+        
+        <main class="max-w-7xl mx-auto px-4 py-6">
+          <div class="bg-gray-800 border border-gray-700 rounded-lg p-6 mb-6">
+            <h2 id="welcome-message" class="text-2xl font-fantasy text-fantasy-gold mb-4">
+              Welcome to RealmQuest!
+            </h2>
+            <p class="text-gray-300 mb-4">You are now in the mystical realm of RealmQuest.</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div class="text-center">
+                <p class="text-gray-300">Level</p>
+                <p class="text-2xl font-bold text-fantasy-gold">1</p>
+              </div>
+              <div class="text-center">
+                <p class="text-gray-300">Health</p>
+                <p class="text-2xl font-bold text-green-500">100</p>
+              </div>
+              <div class="text-center">
+                <p class="text-gray-300">Mana</p>
+                <p class="text-2xl font-bold text-blue-500">50</p>
+              </div>
+              <div class="text-center">
+                <p class="text-gray-300">Gold</p>
+                <p class="text-2xl font-bold text-fantasy-gold">100</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-gray-800 border border-gray-700 rounded-lg p-6">
+            <h3 class="text-xl font-fantasy text-fantasy-gold mb-4">Game Features Coming Soon</h3>
+            <ul class="text-gray-300 space-y-2">
+              <li>• Real-time multiplayer combat</li>
+              <li>• Character progression and leveling</li>
+              <li>• Dungeon exploration</li>
+              <li>• Item collection and crafting</li>
+              <li>• Guild system</li>
+              <li>• Trading with other players</li>
+            </ul>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      let currentUser = null;
+
+      function showPage(pageName) {
+        // Hide all pages
+        document.getElementById('home-page').classList.add('hidden');
+        document.getElementById('login-page').classList.add('hidden');
+        document.getElementById('register-page').classList.add('hidden');
+        document.getElementById('game-page').classList.add('hidden');
+        
+        // Show the requested page
+        document.getElementById(pageName + '-page').classList.remove('hidden');
+      }
+
+      function handleLogin(event) {
+        event.preventDefault();
+        const username = document.getElementById('login-username').value;
+        const password = document.getElementById('login-password').value;
+        
+        if (username && password) {
+          currentUser = username;
+          document.getElementById('player-name').textContent = username;
+          document.getElementById('welcome-message').textContent = `Welcome, ${username}!`;
+          showPage('game');
+        }
+      }
+
+      function handleRegister(event) {
+        event.preventDefault();
+        const username = document.getElementById('register-username').value;
+        const email = document.getElementById('register-email').value;
+        const password = document.getElementById('register-password').value;
+        
+        if (username && email && password) {
+          currentUser = username;
+          document.getElementById('player-name').textContent = username;
+          document.getElementById('welcome-message').textContent = `Welcome, ${username}!`;
+          showPage('game');
+        }
+      }
+
+      function handleLogout() {
+        currentUser = null;
+        document.getElementById('login-username').value = '';
+        document.getElementById('login-password').value = '';
+        document.getElementById('register-username').value = '';
+        document.getElementById('register-email').value = '';
+        document.getElementById('register-password').value = '';
+        showPage('home');
+      }
+
+      // Show home page by default
+      showPage('home');
+    </script>
   </body>
 </html> 
