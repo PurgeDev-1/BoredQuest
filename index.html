@@ -43,6 +43,7 @@
               'pixel-bounce': 'pixel-bounce 0.5s ease-in-out',
               'pixel-glow': 'pixel-glow 2s ease-in-out infinite alternate',
               'scanline': 'scanline 2s linear infinite',
+              'blink': 'blink 1s infinite',
             },
             keyframes: {
               'pixel-bounce': {
@@ -56,6 +57,10 @@
               'scanline': {
                 '0%': { transform: 'translateY(-100%)' },
                 '100%': { transform: 'translateY(100%)' },
+              },
+              'blink': {
+                '0%, 50%': { opacity: '1' },
+                '51%, 100%': { opacity: '0' },
               }
             }
           }
@@ -115,7 +120,7 @@
         background: #000000;
         color: #00ff00;
         font-family: 'VT323', monospace;
-        font-size: 18px;
+        font-size: 16px;
       }
       
       .pixel-card {
@@ -147,7 +152,7 @@
       .health-bar {
         border: 2px solid #ffffff;
         background: #000000;
-        height: 16px;
+        height: 12px;
       }
       
       .health-bar-fill {
@@ -159,7 +164,7 @@
       .mana-bar {
         border: 2px solid #ffffff;
         background: #000000;
-        height: 16px;
+        height: 12px;
       }
       
       .mana-bar-fill {
@@ -171,7 +176,7 @@
       .experience-bar {
         border: 2px solid #ffffff;
         background: #000000;
-        height: 8px;
+        height: 6px;
       }
       
       .experience-bar-fill {
@@ -192,8 +197,56 @@
         border: 2px solid #00ff00;
         background: #000000;
         font-family: 'VT323', monospace;
-        font-size: 16px;
+        font-size: 14px;
         color: #00ff00;
+      }
+      
+      .chat-window {
+        border: 2px solid #ffffff;
+        background: #000000;
+        font-family: 'VT323', monospace;
+        font-size: 14px;
+        color: #ffffff;
+      }
+      
+      .chat-tab {
+        border: 2px solid #ffffff;
+        background: #2d2d2d;
+        color: #ffffff;
+        font-family: 'VT323', monospace;
+        font-size: 12px;
+        transition: all 0.1s ease;
+      }
+      
+      .chat-tab.active {
+        background: #000000;
+        border-bottom-color: #000000;
+      }
+      
+      .chat-message {
+        margin: 2px 0;
+        word-wrap: break-word;
+      }
+      
+      .chat-message.system {
+        color: #ffff00;
+      }
+      
+      .chat-message.global {
+        color: #00ffff;
+      }
+      
+      .chat-message.local {
+        color: #00ff00;
+      }
+      
+      .chat-message.private {
+        color: #ff00ff;
+      }
+      
+      .chat-message.admin {
+        color: #ff0000;
+        font-weight: bold;
       }
       
       .scanline {
@@ -206,35 +259,106 @@
         animation: scanline 2s linear infinite;
         pointer-events: none;
       }
+      
+      .game-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 10px;
+      }
+      
+      .game-layout {
+        display: grid;
+        grid-template-columns: 300px 1fr 300px;
+        grid-template-rows: auto 1fr auto;
+        gap: 10px;
+        height: calc(100vh - 40px);
+      }
+      
+      .game-header {
+        grid-column: 1 / -1;
+        grid-row: 1;
+      }
+      
+      .game-sidebar-left {
+        grid-column: 1;
+        grid-row: 2;
+      }
+      
+      .game-main {
+        grid-column: 2;
+        grid-row: 2;
+      }
+      
+      .game-sidebar-right {
+        grid-column: 3;
+        grid-row: 2;
+      }
+      
+      .game-footer {
+        grid-column: 1 / -1;
+        grid-row: 3;
+      }
+      
+      @media (max-width: 1024px) {
+        .game-layout {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto auto 1fr auto auto;
+        }
+        
+        .game-header {
+          grid-column: 1;
+          grid-row: 1;
+        }
+        
+        .game-sidebar-left {
+          grid-column: 1;
+          grid-row: 2;
+        }
+        
+        .game-main {
+          grid-column: 1;
+          grid-row: 3;
+        }
+        
+        .game-sidebar-right {
+          grid-column: 1;
+          grid-row: 4;
+        }
+        
+        .game-footer {
+          grid-column: 1;
+          grid-row: 5;
+        }
+      }
     </style>
   </head>
-  <body class="bg-black text-white font-retro overflow-x-hidden">
+  <body class="bg-black text-white font-retro overflow-hidden">
     <div class="scanline"></div>
     <div id="app">
       <!-- Home Page -->
       <div id="home-page" class="min-h-screen flex items-center justify-center relative">
         <div class="text-center max-w-4xl mx-auto px-4 z-10">
           <h1 class="text-6xl md:text-8xl font-pixel text-yellow-400 mb-6 animate-pixel-glow">
-            BoredQuest
+            BOREDQUEST
           </h1>
           <p class="text-xl md:text-2xl text-green-400 mb-8 font-retro">
-            Embark on pixelated adventures in a retro realm filled with 8-bit magic, monsters, and treasures
+            EMBARK ON PIXELATED ADVENTURES IN A RETRO REALM
           </p>
           
           <div class="grid md:grid-cols-3 gap-8 mb-12">
             <div class="pixel-card p-6">
-              <h3 class="text-lg font-pixel text-cyan-400 mb-4">Real-time Multiplayer</h3>
-              <p class="text-gray-300 font-retro text-lg">Play with friends in pixelated real-time combat and exploration</p>
+              <h3 class="text-lg font-pixel text-cyan-400 mb-4">REAL-TIME MULTIPLAYER</h3>
+              <p class="text-gray-300 font-retro text-lg">PLAY WITH FRIENDS IN PIXELATED COMBAT</p>
             </div>
             
             <div class="pixel-card p-6">
-              <h3 class="text-lg font-pixel text-green-400 mb-4">Character Progression</h3>
-              <p class="text-gray-300 font-retro text-lg">Level up and become more powerful through epic 8-bit battles</p>
+              <h3 class="text-lg font-pixel text-green-400 mb-4">CHARACTER PROGRESSION</h3>
+              <p class="text-gray-300 font-retro text-lg">LEVEL UP THROUGH EPIC 8-BIT BATTLES</p>
             </div>
             
             <div class="pixel-card p-6">
-              <h3 class="text-lg font-pixel text-purple-400 mb-4">Dungeon Crawling</h3>
-              <p class="text-gray-300 font-retro text-lg">Explore procedurally generated pixel dungeons with unique challenges</p>
+              <h3 class="text-lg font-pixel text-purple-400 mb-4">DUNGEON CRAWLING</h3>
+              <p class="text-gray-300 font-retro text-lg">EXPLORE PROCEDURALLY GENERATED DUNGEONS</p>
             </div>
           </div>
 
@@ -346,142 +470,214 @@
       </div>
 
       <!-- Game Page -->
-      <div id="game-page" class="min-h-screen hidden">
-        <header class="bg-gray-900 border-b-2 border-white">
-          <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between items-center h-16">
-              <h1 class="text-xl font-pixel text-yellow-400">
-                BOREDQUEST
-              </h1>
-              <div class="flex items-center space-x-4">
-                <span id="player-name" class="text-green-400 font-retro text-lg"></span>
-                <span id="admin-badge" class="bg-red-600 text-white px-2 py-1 rounded text-xs font-pixel hidden">ADMIN</span>
-                <button
-                  onclick="handleLogout()"
-                  class="pixel-button text-black font-pixel py-2 px-4 text-xs"
-                >
-                  LOGOUT
-                </button>
-              </div>
-            </div>
-          </div>
-        </header>
-        
-        <main class="max-w-7xl mx-auto px-4 py-6">
-          <div class="pixel-card p-6 mb-6">
-            <h2 id="welcome-message" class="text-xl font-pixel text-yellow-400 mb-4">
-              WELCOME TO BOREDQUEST!
-            </h2>
-            <p class="text-gray-300 mb-4 font-retro text-lg">You are now in the pixelated realm of BoredQuest.</p>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-              <div class="text-center">
-                <p class="text-gray-300 font-retro text-lg">LEVEL</p>
-                <p class="text-2xl font-pixel text-yellow-400">1</p>
-              </div>
-              <div class="text-center">
-                <p class="text-gray-300 font-retro text-lg">HEALTH</p>
-                <p class="text-2xl font-pixel text-green-400">100</p>
-              </div>
-              <div class="text-center">
-                <p class="text-gray-300 font-retro text-lg">MANA</p>
-                <p class="text-2xl font-pixel text-blue-400">50</p>
-              </div>
-              <div class="text-center">
-                <p class="text-gray-300 font-retro text-lg">GOLD</p>
-                <p class="text-2xl font-pixel text-yellow-400">100</p>
+      <div id="game-page" class="h-screen hidden">
+        <div class="game-container">
+          <div class="game-layout">
+            <!-- Header -->
+            <div class="game-header">
+              <div class="pixel-card p-3">
+                <div class="flex justify-between items-center">
+                  <h1 class="text-lg font-pixel text-yellow-400">
+                    BOREDQUEST
+                  </h1>
+                  <div class="flex items-center space-x-4">
+                    <span id="player-name" class="text-green-400 font-retro text-sm"></span>
+                    <span id="admin-badge" class="bg-red-600 text-white px-2 py-1 text-xs font-pixel hidden">ADMIN</span>
+                    <button
+                      onclick="handleLogout()"
+                      class="pixel-button text-black font-pixel py-1 px-3 text-xs"
+                    >
+                      LOGOUT
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
             
-            <!-- Health and Mana Bars -->
-            <div class="space-y-3">
-              <div>
-                <div class="flex justify-between text-sm mb-1">
-                  <span class="text-green-400 font-retro">HEALTH</span>
-                  <span class="text-green-400 font-retro">100/100</span>
+            <!-- Left Sidebar - Character Info -->
+            <div class="game-sidebar-left">
+              <div class="pixel-card p-3 mb-3">
+                <h3 class="text-sm font-pixel text-yellow-400 mb-3">CHARACTER</h3>
+                <div class="grid grid-cols-2 gap-2 mb-3">
+                  <div class="text-center">
+                    <p class="text-gray-300 font-retro text-xs">LEVEL</p>
+                    <p class="text-lg font-pixel text-yellow-400">1</p>
+                  </div>
+                  <div class="text-center">
+                    <p class="text-gray-300 font-retro text-xs">GOLD</p>
+                    <p class="text-lg font-pixel text-yellow-400">100</p>
+                  </div>
                 </div>
-                <div class="health-bar">
-                  <div class="health-bar-fill" style="width: 100%"></div>
+                
+                <!-- Health and Mana Bars -->
+                <div class="space-y-2">
+                  <div>
+                    <div class="flex justify-between text-xs mb-1">
+                      <span class="text-green-400 font-retro">HP</span>
+                      <span class="text-green-400 font-retro">100/100</span>
+                    </div>
+                    <div class="health-bar">
+                      <div class="health-bar-fill" style="width: 100%"></div>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <div class="flex justify-between text-xs mb-1">
+                      <span class="text-blue-400 font-retro">MP</span>
+                      <span class="text-blue-400 font-retro">50/50</span>
+                    </div>
+                    <div class="mana-bar">
+                      <div class="mana-bar-fill" style="width: 100%"></div>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <div class="flex justify-between text-xs mb-1">
+                      <span class="text-yellow-400 font-retro">XP</span>
+                      <span class="text-yellow-400 font-retro">0</span>
+                    </div>
+                    <div class="experience-bar">
+                      <div class="experience-bar-fill" style="width: 0%"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
               
-              <div>
-                <div class="flex justify-between text-sm mb-1">
-                  <span class="text-blue-400 font-retro">MANA</span>
-                  <span class="text-blue-400 font-retro">50/50</span>
-                </div>
-                <div class="mana-bar">
-                  <div class="mana-bar-fill" style="width: 100%"></div>
-                </div>
-              </div>
-              
-              <div>
-                <div class="flex justify-between text-sm mb-1">
-                  <span class="text-yellow-400 font-retro">EXPERIENCE</span>
-                  <span class="text-yellow-400 font-retro">0 XP</span>
-                </div>
-                <div class="experience-bar">
-                  <div class="experience-bar-fill" style="width: 0%"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Admin Panel (only visible to admins) -->
-          <div id="admin-panel" class="admin-panel p-6 mb-6 hidden">
-            <h3 class="text-xl font-pixel text-red-400 mb-4">🔧 ADMIN PANEL</h3>
-            <div class="grid md:grid-cols-2 gap-4">
-              <div>
-                <h4 class="text-lg font-pixel text-red-300 mb-2">SERVER MANAGEMENT</h4>
-                <div class="space-y-2">
-                  <button onclick="adminAction('restart')" class="w-full pixel-button text-black font-pixel py-2 px-4 text-xs">
-                    RESTART SERVER
+              <!-- Quick Actions -->
+              <div class="pixel-card p-3">
+                <h3 class="text-sm font-pixel text-yellow-400 mb-3">ACTIONS</h3>
+                <div class="grid grid-cols-2 gap-2">
+                  <button class="pixel-button text-black font-pixel py-2 px-3 text-xs">
+                    ATTACK
                   </button>
-                  <button onclick="adminAction('maintenance')" class="w-full pixel-button text-black font-pixel py-2 px-4 text-xs">
-                    TOGGLE MAINTENANCE
+                  <button class="pixel-button text-black font-pixel py-2 px-3 text-xs">
+                    HEAL
                   </button>
-                  <button onclick="adminAction('backup')" class="w-full pixel-button text-black font-pixel py-2 px-4 text-xs">
-                    CREATE BACKUP
+                  <button class="pixel-button text-black font-pixel py-2 px-3 text-xs">
+                    MAGIC
                   </button>
-                </div>
-              </div>
-              <div>
-                <h4 class="text-lg font-pixel text-red-300 mb-2">PLAYER MANAGEMENT</h4>
-                <div class="space-y-2">
-                  <button onclick="adminAction('ban')" class="w-full pixel-button text-black font-pixel py-2 px-4 text-xs">
-                    BAN PLAYER
-                  </button>
-                  <button onclick="adminAction('kick')" class="w-full pixel-button text-black font-pixel py-2 px-4 text-xs">
-                    KICK PLAYER
-                  </button>
-                  <button onclick="adminAction('teleport')" class="w-full pixel-button text-black font-pixel py-2 px-4 text-xs">
-                    TELEPORT PLAYER
+                  <button class="pixel-button text-black font-pixel py-2 px-3 text-xs">
+                    ITEMS
                   </button>
                 </div>
               </div>
             </div>
-            <div class="mt-4">
-              <h4 class="text-lg font-pixel text-red-300 mb-2">ADMIN CONSOLE</h4>
-              <div class="admin-console p-3">
-                <div id="admin-console" class="h-32 overflow-y-auto">
-                  > Admin console ready...
+            
+            <!-- Main Game Area -->
+            <div class="game-main">
+              <div class="pixel-card p-3 h-full">
+                <h3 class="text-sm font-pixel text-yellow-400 mb-3">GAME WORLD</h3>
+                <div class="bg-black border-2 border-white p-3 h-64 mb-3">
+                  <p class="text-green-400 font-retro text-sm">WELCOME TO BOREDQUEST!</p>
+                  <p class="text-gray-300 font-retro text-sm mt-2">YOU ARE IN THE PIXELATED REALM.</p>
+                  <p class="text-gray-300 font-retro text-sm">NO ENEMIES NEARBY.</p>
+                </div>
+                
+                <!-- Admin Panel (only visible to admins) -->
+                <div id="admin-panel" class="admin-panel p-3 hidden">
+                  <h4 class="text-sm font-pixel text-red-400 mb-2">ADMIN PANEL</h4>
+                  <div class="grid grid-cols-2 gap-2">
+                    <button onclick="adminAction('restart')" class="pixel-button text-black font-pixel py-1 px-2 text-xs">
+                      RESTART
+                    </button>
+                    <button onclick="adminAction('maintenance')" class="pixel-button text-black font-pixel py-1 px-2 text-xs">
+                      MAINTENANCE
+                    </button>
+                    <button onclick="adminAction('backup')" class="pixel-button text-black font-pixel py-1 px-2 text-xs">
+                      BACKUP
+                    </button>
+                    <button onclick="adminAction('ban')" class="pixel-button text-black font-pixel py-1 px-2 text-xs">
+                      BAN PLAYER
+                    </button>
+                  </div>
+                  <div class="mt-2">
+                    <div class="admin-console p-2">
+                      <div id="admin-console" class="h-16 overflow-y-auto text-xs">
+                        > Admin console ready...
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Right Sidebar - Chat -->
+            <div class="game-sidebar-right">
+              <div class="pixel-card p-3 h-full">
+                <h3 class="text-sm font-pixel text-yellow-400 mb-3">CHAT</h3>
+                
+                <!-- Chat Tabs -->
+                <div class="flex mb-2">
+                  <button onclick="switchChatTab('global')" class="chat-tab active px-2 py-1 text-xs">
+                    GLOBAL
+                  </button>
+                  <button onclick="switchChatTab('local')" class="chat-tab px-2 py-1 text-xs">
+                    LOCAL
+                  </button>
+                  <button onclick="switchChatTab('private')" class="chat-tab px-2 py-1 text-xs">
+                    PRIVATE
+                  </button>
+                </div>
+                
+                <!-- Chat Window -->
+                <div class="chat-window p-2 mb-2 h-48 overflow-y-auto">
+                  <div id="chat-messages">
+                    <div class="chat-message system">[SYSTEM] Welcome to BoredQuest!</div>
+                    <div class="chat-message global">[GLOBAL] Player1: Hello everyone!</div>
+                    <div class="chat-message local">[LOCAL] Player2: Anyone want to team up?</div>
+                  </div>
+                </div>
+                
+                <!-- Chat Input -->
+                <div class="flex">
+                  <input
+                    type="text"
+                    id="chat-input"
+                    class="pixel-input flex-1 px-2 py-1 text-sm"
+                    placeholder="Type your message..."
+                    maxlength="100"
+                  />
+                  <button
+                    onclick="sendChatMessage()"
+                    class="pixel-button text-black font-pixel py-1 px-2 text-xs ml-2"
+                  >
+                    SEND
+                  </button>
+                </div>
+                
+                <!-- Online Players -->
+                <div class="mt-3">
+                  <h4 class="text-xs font-pixel text-yellow-400 mb-2">ONLINE (3)</h4>
+                  <div class="text-xs text-gray-300 space-y-1">
+                    <div class="flex justify-between">
+                      <span>Player1</span>
+                      <span class="text-green-400">●</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span>Player2</span>
+                      <span class="text-green-400">●</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span>Player3</span>
+                      <span class="text-green-400">●</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="game-footer">
+              <div class="pixel-card p-2">
+                <div class="flex justify-between items-center text-xs">
+                  <span class="text-gray-300">STATUS: ONLINE</span>
+                  <span class="text-gray-300">PLAYERS: 3</span>
+                  <span class="text-gray-300">UPTIME: 2h 15m</span>
                 </div>
               </div>
             </div>
           </div>
-          
-          <div class="pixel-card p-6">
-            <h3 class="text-xl font-pixel text-yellow-400 mb-4">GAME FEATURES COMING SOON</h3>
-            <ul class="text-gray-300 space-y-2 font-retro text-lg">
-              <li>• Real-time multiplayer combat</li>
-              <li>• Character progression and leveling</li>
-              <li>• Dungeon exploration</li>
-              <li>• Item collection and crafting</li>
-              <li>• Guild system</li>
-              <li>• Trading with other players</li>
-            </ul>
-          </div>
-        </main>
+        </div>
       </div>
     </div>
 
@@ -491,6 +687,21 @@
       let maintenanceMode = false;
       let accounts = [];
       let isFirstAccount = true;
+      let currentChatTab = 'global';
+      let chatMessages = {
+        global: [
+          { type: 'system', text: 'Welcome to BoredQuest!' },
+          { type: 'global', user: 'Player1', text: 'Hello everyone!' },
+          { type: 'local', user: 'Player2', text: 'Anyone want to team up?' }
+        ],
+        local: [
+          { type: 'system', text: 'Local chat - only visible to nearby players' },
+          { type: 'local', user: 'Player2', text: 'Anyone want to team up?' }
+        ],
+        private: [
+          { type: 'system', text: 'Private messages will appear here' }
+        ]
+      };
 
       function showPage(pageName) {
         // Hide all pages
@@ -518,16 +729,16 @@
             document.getElementById('player-name').textContent = username;
             
             if (isAdmin) {
-              document.getElementById('welcome-message').textContent = `WELCOME, ${username}! (ADMIN)`;
               document.getElementById('admin-badge').classList.remove('hidden');
               document.getElementById('admin-panel').classList.remove('hidden');
               logToAdminConsole('Admin login successful');
+              addChatMessage('system', `Admin ${username} has logged in!`);
             } else {
-              document.getElementById('welcome-message').textContent = `WELCOME, ${username}!`;
               document.getElementById('admin-badge').classList.add('hidden');
               document.getElementById('admin-panel').classList.add('hidden');
             }
             showPage('game');
+            addChatMessage('system', `${username} has joined the game!`);
           } else {
             alert('INVALID USERNAME OR PASSWORD!');
           }
@@ -562,23 +773,26 @@
           document.getElementById('player-name').textContent = username;
           
           if (isFirstAccount) {
-            document.getElementById('welcome-message').textContent = `WELCOME, ${username}! (FIRST ADMIN)`;
             document.getElementById('admin-badge').classList.remove('hidden');
             document.getElementById('admin-panel').classList.remove('hidden');
             logToAdminConsole('First account created - Admin privileges granted');
+            addChatMessage('system', `🎉 ${username} is the first player and has been granted admin privileges!`);
             alert('🎉 CONGRATULATIONS! YOU ARE THE FIRST PLAYER AND HAVE BEEN GRANTED ADMIN PRIVILEGES!');
             isFirstAccount = false;
           } else {
-            document.getElementById('welcome-message').textContent = `WELCOME, ${username}!`;
             document.getElementById('admin-badge').classList.add('hidden');
             document.getElementById('admin-panel').classList.add('hidden');
           }
           
           showPage('game');
+          addChatMessage('system', `${username} has joined BoredQuest!`);
         }
       }
 
       function handleLogout() {
+        if (currentUser) {
+          addChatMessage('system', `${currentUser} has left the game.`);
+        }
         currentUser = null;
         isAdmin = false;
         document.getElementById('login-username').value = '';
@@ -596,37 +810,30 @@
         switch(action) {
           case 'restart':
             logToAdminConsole(`[${timestamp}] Server restart initiated...`);
+            addChatMessage('system', 'Server restart initiated by admin...');
             setTimeout(() => {
               logToAdminConsole(`[${timestamp}] Server restart completed successfully`);
+              addChatMessage('system', 'Server restart completed successfully');
             }, 2000);
             break;
           case 'maintenance':
             maintenanceMode = !maintenanceMode;
             logToAdminConsole(`[${timestamp}] Maintenance mode ${maintenanceMode ? 'enabled' : 'disabled'}`);
+            addChatMessage('system', `Maintenance mode ${maintenanceMode ? 'enabled' : 'disabled'} by admin`);
             break;
           case 'backup':
             logToAdminConsole(`[${timestamp}] Creating server backup...`);
+            addChatMessage('system', 'Creating server backup...');
             setTimeout(() => {
               logToAdminConsole(`[${timestamp}] Backup completed: boredquest_backup_${Date.now()}.zip`);
+              addChatMessage('system', `Backup completed: boredquest_backup_${Date.now()}.zip`);
             }, 1500);
             break;
           case 'ban':
             const playerToBan = prompt('Enter player name to ban:');
             if (playerToBan) {
               logToAdminConsole(`[${timestamp}] Player '${playerToBan}' has been banned`);
-            }
-            break;
-          case 'kick':
-            const playerToKick = prompt('Enter player name to kick:');
-            if (playerToKick) {
-              logToAdminConsole(`[${timestamp}] Player '${playerToKick}' has been kicked from the server`);
-            }
-            break;
-          case 'teleport':
-            const playerToTeleport = prompt('Enter player name:');
-            const location = prompt('Enter destination:');
-            if (playerToTeleport && location) {
-              logToAdminConsole(`[${timestamp}] Teleported '${playerToTeleport}' to ${location}`);
+              addChatMessage('system', `Player '${playerToBan}' has been banned by admin`);
             }
             break;
         }
@@ -637,6 +844,71 @@
         console.innerHTML += '<br>' + message;
         console.scrollTop = console.scrollHeight;
       }
+
+      function switchChatTab(tab) {
+        currentChatTab = tab;
+        
+        // Update tab styling
+        document.querySelectorAll('.chat-tab').forEach(t => t.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        // Update chat messages
+        updateChatDisplay();
+      }
+
+      function updateChatDisplay() {
+        const chatContainer = document.getElementById('chat-messages');
+        chatContainer.innerHTML = '';
+        
+        chatMessages[currentChatTab].forEach(msg => {
+          const messageDiv = document.createElement('div');
+          messageDiv.className = `chat-message ${msg.type}`;
+          
+          if (msg.user) {
+            messageDiv.textContent = `[${currentChatTab.toUpperCase()}] ${msg.user}: ${msg.text}`;
+          } else {
+            messageDiv.textContent = `[${msg.type.toUpperCase()}] ${msg.text}`;
+          }
+          
+          chatContainer.appendChild(messageDiv);
+        });
+        
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
+
+      function addChatMessage(type, text, user = null) {
+        const message = { type, text, user };
+        chatMessages[currentChatTab].push(message);
+        
+        // Keep only last 50 messages
+        if (chatMessages[currentChatTab].length > 50) {
+          chatMessages[currentChatTab].shift();
+        }
+        
+        updateChatDisplay();
+      }
+
+      function sendChatMessage() {
+        const input = document.getElementById('chat-input');
+        const message = input.value.trim();
+        
+        if (message && currentUser) {
+          addChatMessage(currentChatTab, message, currentUser);
+          input.value = '';
+        }
+      }
+
+      // Handle Enter key in chat input
+      document.addEventListener('DOMContentLoaded', function() {
+        const chatInput = document.getElementById('chat-input');
+        if (chatInput) {
+          chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+              sendChatMessage();
+            }
+          });
+        }
+      });
 
       // Show home page by default
       showPage('home');
