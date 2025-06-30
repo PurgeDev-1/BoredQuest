@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RealmQuest - Fantasy MMORPG</title>
-    <meta name="description" content="Embark on epic adventures in RealmQuest, a browser-based fantasy MMORPG filled with magic, monsters, and treasures." />
+    <title>BoredQuest - Pixel Art MMORPG</title>
+    <meta name="description" content="Embark on pixelated adventures in BoredQuest, a retro-style MMORPG filled with 8-bit magic, monsters, and treasures." />
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts - Pixel Art Style -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P:wght@400&family=VT323:wght@400&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,19 +19,44 @@
         theme: {
           extend: {
             colors: {
-              fantasy: {
-                gold: '#ffd700',
-                silver: '#c0c0c0',
-                bronze: '#cd7f32',
-                magic: '#8a2be2',
-                fire: '#ff4500',
-                ice: '#00bfff',
-                nature: '#228b22',
+              pixel: {
+                black: '#0f0f0f',
+                dark: '#1a1a1a',
+                gray: '#2d2d2d',
+                light: '#4a4a4a',
+                white: '#ffffff',
+                red: '#ff0000',
+                green: '#00ff00',
+                blue: '#0000ff',
+                yellow: '#ffff00',
+                purple: '#ff00ff',
+                cyan: '#00ffff',
+                orange: '#ff8000',
+                pink: '#ff0080',
               }
             },
             fontFamily: {
-              fantasy: ['Cinzel', 'serif'],
-              game: ['Orbitron', 'monospace'],
+              pixel: ['Press Start 2P', 'monospace'],
+              retro: ['VT323', 'monospace'],
+            },
+            animation: {
+              'pixel-bounce': 'pixel-bounce 0.5s ease-in-out',
+              'pixel-glow': 'pixel-glow 2s ease-in-out infinite alternate',
+              'scanline': 'scanline 2s linear infinite',
+            },
+            keyframes: {
+              'pixel-bounce': {
+                '0%, 100%': { transform: 'translateY(0px)' },
+                '50%': { transform: 'translateY(-4px)' },
+              },
+              'pixel-glow': {
+                '0%': { textShadow: '0 0 4px currentColor' },
+                '100%': { textShadow: '0 0 8px currentColor, 0 0 12px currentColor' },
+              },
+              'scanline': {
+                '0%': { transform: 'translateY(-100%)' },
+                '100%': { transform: 'translateY(100%)' },
+              }
             }
           }
         }
@@ -39,59 +64,192 @@
     </script>
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="RealmQuest - Fantasy MMORPG" />
-    <meta property="og:description" content="Embark on epic adventures in RealmQuest, a browser-based fantasy MMORPG filled with magic, monsters, and treasures." />
+    <meta property="og:title" content="BoredQuest - Pixel Art MMORPG" />
+    <meta property="og:description" content="Embark on pixelated adventures in BoredQuest, a retro-style MMORPG filled with 8-bit magic, monsters, and treasures." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://purgedev-1.github.io/RealmQuest/" />
-    <meta property="og:image" content="/og-image.png" />
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="RealmQuest - Fantasy MMORPG" />
-    <meta name="twitter:description" content="Embark on epic adventures in RealmQuest, a browser-based fantasy MMORPG filled with magic, monsters, and treasures." />
-    <meta name="twitter:image" content="/og-image.png" />
+    <meta name="twitter:title" content="BoredQuest - Pixel Art MMORPG" />
+    <meta name="twitter:description" content="Embark on pixelated adventures in BoredQuest, a retro-style MMORPG filled with 8-bit magic, monsters, and treasures." />
+    
+    <style>
+      /* Pixel Art Styling */
+      .pixel-border {
+        border: 2px solid #ffffff;
+        box-shadow: 
+          inset 2px 2px 0px #000000,
+          inset -2px -2px 0px #808080;
+      }
+      
+      .pixel-button {
+        border: 2px solid #ffffff;
+        box-shadow: 
+          inset 2px 2px 0px #000000,
+          inset -2px -2px 0px #808080;
+        background: linear-gradient(45deg, #c0c0c0, #e0e0e0);
+        transition: all 0.1s ease;
+      }
+      
+      .pixel-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 
+          inset 1px 1px 0px #000000,
+          inset -1px -1px 0px #808080,
+          0 4px 0px #000000;
+      }
+      
+      .pixel-button:active {
+        transform: translateY(0px);
+        box-shadow: 
+          inset 2px 2px 0px #000000,
+          inset -2px -2px 0px #808080;
+      }
+      
+      .pixel-input {
+        border: 2px solid #ffffff;
+        box-shadow: 
+          inset 2px 2px 0px #000000,
+          inset -2px -2px 0px #808080;
+        background: #000000;
+        color: #00ff00;
+        font-family: 'VT323', monospace;
+        font-size: 18px;
+      }
+      
+      .pixel-card {
+        border: 2px solid #ffffff;
+        box-shadow: 
+          inset 2px 2px 0px #000000,
+          inset -2px -2px 0px #808080;
+        background: #1a1a1a;
+        position: relative;
+      }
+      
+      .pixel-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(255, 255, 255, 0.03) 2px,
+          rgba(255, 255, 255, 0.03) 4px
+        );
+        pointer-events: none;
+      }
+      
+      .health-bar {
+        border: 2px solid #ffffff;
+        background: #000000;
+        height: 16px;
+      }
+      
+      .health-bar-fill {
+        background: linear-gradient(90deg, #ff0000, #ff8000);
+        height: 100%;
+        transition: width 0.3s ease;
+      }
+      
+      .mana-bar {
+        border: 2px solid #ffffff;
+        background: #000000;
+        height: 16px;
+      }
+      
+      .mana-bar-fill {
+        background: linear-gradient(90deg, #0000ff, #0080ff);
+        height: 100%;
+        transition: width 0.3s ease;
+      }
+      
+      .experience-bar {
+        border: 2px solid #ffffff;
+        background: #000000;
+        height: 8px;
+      }
+      
+      .experience-bar-fill {
+        background: linear-gradient(90deg, #ffff00, #ff8000);
+        height: 100%;
+        transition: width 0.3s ease;
+      }
+      
+      .admin-panel {
+        border: 2px solid #ff0000;
+        box-shadow: 
+          inset 2px 2px 0px #800000,
+          inset -2px -2px 0px #ff8080;
+        background: #1a0000;
+      }
+      
+      .admin-console {
+        border: 2px solid #00ff00;
+        background: #000000;
+        font-family: 'VT323', monospace;
+        font-size: 16px;
+        color: #00ff00;
+      }
+      
+      .scanline {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.1);
+        animation: scanline 2s linear infinite;
+        pointer-events: none;
+      }
+    </style>
   </head>
-  <body class="bg-gray-900 text-white font-game">
+  <body class="bg-black text-white font-retro overflow-x-hidden">
+    <div class="scanline"></div>
     <div id="app">
       <!-- Home Page -->
-      <div id="home-page" class="min-h-screen flex items-center justify-center">
-        <div class="text-center max-w-4xl mx-auto px-4">
-          <h1 class="text-7xl font-fantasy text-fantasy-gold mb-6 text-shadow">
-            RealmQuest
+      <div id="home-page" class="min-h-screen flex items-center justify-center relative">
+        <div class="text-center max-w-4xl mx-auto px-4 z-10">
+          <h1 class="text-6xl md:text-8xl font-pixel text-yellow-400 mb-6 animate-pixel-glow">
+            BoredQuest
           </h1>
-          <p class="text-2xl text-gray-300 mb-8">
-            Embark on epic adventures in a mystical realm filled with magic, monsters, and treasures
+          <p class="text-xl md:text-2xl text-green-400 mb-8 font-retro">
+            Embark on pixelated adventures in a retro realm filled with 8-bit magic, monsters, and treasures
           </p>
           
           <div class="grid md:grid-cols-3 gap-8 mb-12">
-            <div class="bg-gray-800 border border-gray-700 rounded-lg p-4">
-              <h3 class="text-xl font-fantasy text-fantasy-gold mb-4">Real-time Multiplayer</h3>
-              <p class="text-gray-300">Play with friends and other adventurers in real-time combat and exploration</p>
+            <div class="pixel-card p-6">
+              <h3 class="text-lg font-pixel text-cyan-400 mb-4">Real-time Multiplayer</h3>
+              <p class="text-gray-300 font-retro text-lg">Play with friends in pixelated real-time combat and exploration</p>
             </div>
             
-            <div class="bg-gray-800 border border-gray-700 rounded-lg p-4">
-              <h3 class="text-xl font-fantasy text-fantasy-gold mb-4">Character Progression</h3>
-              <p class="text-gray-300">Level up, gain skills, and become more powerful through epic battles</p>
+            <div class="pixel-card p-6">
+              <h3 class="text-lg font-pixel text-green-400 mb-4">Character Progression</h3>
+              <p class="text-gray-300 font-retro text-lg">Level up and become more powerful through epic 8-bit battles</p>
             </div>
             
-            <div class="bg-gray-800 border border-gray-700 rounded-lg p-4">
-              <h3 class="text-xl font-fantasy text-fantasy-gold mb-4">Dungeon Crawling</h3>
-              <p class="text-gray-300">Explore procedurally generated dungeons with unique challenges and rewards</p>
+            <div class="pixel-card p-6">
+              <h3 class="text-lg font-pixel text-purple-400 mb-4">Dungeon Crawling</h3>
+              <p class="text-gray-300 font-retro text-lg">Explore procedurally generated pixel dungeons with unique challenges</p>
             </div>
           </div>
 
           <div class="space-x-4">
             <button 
               onclick="showPage('login')"
-              class="bg-gradient-to-r from-fantasy-gold to-fantasy-bronze text-black font-bold py-2 px-4 rounded-lg hover:from-fantasy-bronze hover:to-fantasy-gold transition-all duration-300"
+              class="pixel-button text-black font-pixel py-3 px-6 text-sm"
             >
-              Login
+              LOGIN
             </button>
             <button 
               onclick="showPage('register')"
-              class="bg-gradient-to-r from-gray-600 to-gray-700 text-white font-bold py-2 px-4 rounded-lg hover:from-gray-500 hover:to-gray-600 transition-all duration-300"
+              class="pixel-button text-black font-pixel py-3 px-6 text-sm"
             >
-              Register
+              REGISTER
             </button>
           </div>
         </div>
@@ -99,119 +257,110 @@
 
       <!-- Login Page -->
       <div id="login-page" class="min-h-screen flex items-center justify-center hidden">
-        <div class="bg-gray-800 border border-gray-700 rounded-lg p-6 max-w-md w-full">
-          <h2 class="text-3xl font-fantasy text-fantasy-gold mb-6 text-center">
-            Login to RealmQuest
+        <div class="pixel-card p-8 max-w-md w-full">
+          <h2 class="text-2xl font-pixel text-yellow-400 mb-6 text-center">
+            LOGIN TO BOREDQUEST
           </h2>
           
-          <form onsubmit="handleLogin(event)" class="space-y-4">
+          <form onsubmit="handleLogin(event)" class="space-y-6">
             <div>
-              <label class="block text-gray-300 mb-2">Username</label>
+              <label class="block text-green-400 mb-2 font-retro text-lg">USERNAME</label>
               <input
                 type="text"
                 id="login-username"
-                class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-fantasy-gold focus:outline-none"
+                class="pixel-input w-full px-3 py-2"
                 required
               />
             </div>
             
             <div>
-              <label class="block text-gray-300 mb-2">Password</label>
+              <label class="block text-green-400 mb-2 font-retro text-lg">PASSWORD</label>
               <input
                 type="password"
                 id="login-password"
-                class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-fantasy-gold focus:outline-none"
+                class="pixel-input w-full px-3 py-2"
                 required
               />
             </div>
             
             <button
               type="submit"
-              class="w-full bg-gradient-to-r from-fantasy-gold to-fantasy-bronze text-black font-bold py-2 px-4 rounded-lg hover:from-fantasy-bronze hover:to-fantasy-gold transition-all duration-300"
+              class="w-full pixel-button text-black font-pixel py-3"
             >
-              Login
+              LOGIN
             </button>
           </form>
           
           <button 
             onclick="showPage('home')"
-            class="w-full mt-4 bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-500 transition-all duration-300"
+            class="w-full mt-6 pixel-button text-black font-pixel py-3"
           >
-            Back to Home
+            BACK TO HOME
           </button>
         </div>
       </div>
 
       <!-- Register Page -->
       <div id="register-page" class="min-h-screen flex items-center justify-center hidden">
-        <div class="bg-gray-800 border border-gray-700 rounded-lg p-6 max-w-md w-full">
-          <h2 class="text-3xl font-fantasy text-fantasy-gold mb-6 text-center">
-            Join RealmQuest
+        <div class="pixel-card p-8 max-w-md w-full">
+          <h2 class="text-2xl font-pixel text-yellow-400 mb-6 text-center">
+            JOIN BOREDQUEST
           </h2>
           
-          <form onsubmit="handleRegister(event)" class="space-y-4">
+          <form onsubmit="handleRegister(event)" class="space-y-6">
             <div>
-              <label class="block text-gray-300 mb-2">Username</label>
+              <label class="block text-green-400 mb-2 font-retro text-lg">USERNAME</label>
               <input
                 type="text"
                 id="register-username"
-                class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-fantasy-gold focus:outline-none"
+                class="pixel-input w-full px-3 py-2"
                 required
               />
             </div>
             
             <div>
-              <label class="block text-gray-300 mb-2">Email</label>
-              <input
-                type="email"
-                id="register-email"
-                class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-fantasy-gold focus:outline-none"
-                required
-              />
-            </div>
-            
-            <div>
-              <label class="block text-gray-300 mb-2">Password</label>
+              <label class="block text-green-400 mb-2 font-retro text-lg">PASSWORD</label>
               <input
                 type="password"
                 id="register-password"
-                class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-fantasy-gold focus:outline-none"
+                class="pixel-input w-full px-3 py-2"
                 required
               />
             </div>
             
             <button
               type="submit"
-              class="w-full bg-gradient-to-r from-fantasy-gold to-fantasy-bronze text-black font-bold py-2 px-4 rounded-lg hover:from-fantasy-bronze hover:to-fantasy-gold transition-all duration-300"
+              class="w-full pixel-button text-black font-pixel py-3"
             >
-              Create Account
+              CREATE ACCOUNT
             </button>
           </form>
           
           <button 
             onclick="showPage('home')"
-            class="w-full mt-4 bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-500 transition-all duration-300"
+            class="w-full mt-6 pixel-button text-black font-pixel py-3"
           >
-            Back to Home
+            BACK TO HOME
           </button>
         </div>
       </div>
 
       <!-- Game Page -->
       <div id="game-page" class="min-h-screen hidden">
-        <header class="bg-gray-800 border-b border-gray-700">
+        <header class="bg-gray-900 border-b-2 border-white">
           <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-16">
-              <h1 class="text-2xl font-fantasy text-fantasy-gold">
-                RealmQuest
+              <h1 class="text-xl font-pixel text-yellow-400">
+                BOREDQUEST
               </h1>
               <div class="flex items-center space-x-4">
-                <span id="player-name" class="text-gray-300"></span>
+                <span id="player-name" class="text-green-400 font-retro text-lg"></span>
+                <span id="admin-badge" class="bg-red-600 text-white px-2 py-1 rounded text-xs font-pixel hidden">ADMIN</span>
                 <button
                   onclick="handleLogout()"
-                  class="bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-500 transition-all duration-300"
+                  class="pixel-button text-black font-pixel py-2 px-4 text-xs"
                 >
-                  Logout
+                  LOGOUT
                 </button>
               </div>
             </div>
@@ -219,35 +368,111 @@
         </header>
         
         <main class="max-w-7xl mx-auto px-4 py-6">
-          <div class="bg-gray-800 border border-gray-700 rounded-lg p-6 mb-6">
-            <h2 id="welcome-message" class="text-2xl font-fantasy text-fantasy-gold mb-4">
-              Welcome to RealmQuest!
+          <div class="pixel-card p-6 mb-6">
+            <h2 id="welcome-message" class="text-xl font-pixel text-yellow-400 mb-4">
+              WELCOME TO BOREDQUEST!
             </h2>
-            <p class="text-gray-300 mb-4">You are now in the mystical realm of RealmQuest.</p>
+            <p class="text-gray-300 mb-4 font-retro text-lg">You are now in the pixelated realm of BoredQuest.</p>
             
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
               <div class="text-center">
-                <p class="text-gray-300">Level</p>
-                <p class="text-2xl font-bold text-fantasy-gold">1</p>
+                <p class="text-gray-300 font-retro text-lg">LEVEL</p>
+                <p class="text-2xl font-pixel text-yellow-400">1</p>
               </div>
               <div class="text-center">
-                <p class="text-gray-300">Health</p>
-                <p class="text-2xl font-bold text-green-500">100</p>
+                <p class="text-gray-300 font-retro text-lg">HEALTH</p>
+                <p class="text-2xl font-pixel text-green-400">100</p>
               </div>
               <div class="text-center">
-                <p class="text-gray-300">Mana</p>
-                <p class="text-2xl font-bold text-blue-500">50</p>
+                <p class="text-gray-300 font-retro text-lg">MANA</p>
+                <p class="text-2xl font-pixel text-blue-400">50</p>
               </div>
               <div class="text-center">
-                <p class="text-gray-300">Gold</p>
-                <p class="text-2xl font-bold text-fantasy-gold">100</p>
+                <p class="text-gray-300 font-retro text-lg">GOLD</p>
+                <p class="text-2xl font-pixel text-yellow-400">100</p>
+              </div>
+            </div>
+            
+            <!-- Health and Mana Bars -->
+            <div class="space-y-3">
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span class="text-green-400 font-retro">HEALTH</span>
+                  <span class="text-green-400 font-retro">100/100</span>
+                </div>
+                <div class="health-bar">
+                  <div class="health-bar-fill" style="width: 100%"></div>
+                </div>
+              </div>
+              
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span class="text-blue-400 font-retro">MANA</span>
+                  <span class="text-blue-400 font-retro">50/50</span>
+                </div>
+                <div class="mana-bar">
+                  <div class="mana-bar-fill" style="width: 100%"></div>
+                </div>
+              </div>
+              
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span class="text-yellow-400 font-retro">EXPERIENCE</span>
+                  <span class="text-yellow-400 font-retro">0 XP</span>
+                </div>
+                <div class="experience-bar">
+                  <div class="experience-bar-fill" style="width: 0%"></div>
+                </div>
               </div>
             </div>
           </div>
           
-          <div class="bg-gray-800 border border-gray-700 rounded-lg p-6">
-            <h3 class="text-xl font-fantasy text-fantasy-gold mb-4">Game Features Coming Soon</h3>
-            <ul class="text-gray-300 space-y-2">
+          <!-- Admin Panel (only visible to admins) -->
+          <div id="admin-panel" class="admin-panel p-6 mb-6 hidden">
+            <h3 class="text-xl font-pixel text-red-400 mb-4">🔧 ADMIN PANEL</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <h4 class="text-lg font-pixel text-red-300 mb-2">SERVER MANAGEMENT</h4>
+                <div class="space-y-2">
+                  <button onclick="adminAction('restart')" class="w-full pixel-button text-black font-pixel py-2 px-4 text-xs">
+                    RESTART SERVER
+                  </button>
+                  <button onclick="adminAction('maintenance')" class="w-full pixel-button text-black font-pixel py-2 px-4 text-xs">
+                    TOGGLE MAINTENANCE
+                  </button>
+                  <button onclick="adminAction('backup')" class="w-full pixel-button text-black font-pixel py-2 px-4 text-xs">
+                    CREATE BACKUP
+                  </button>
+                </div>
+              </div>
+              <div>
+                <h4 class="text-lg font-pixel text-red-300 mb-2">PLAYER MANAGEMENT</h4>
+                <div class="space-y-2">
+                  <button onclick="adminAction('ban')" class="w-full pixel-button text-black font-pixel py-2 px-4 text-xs">
+                    BAN PLAYER
+                  </button>
+                  <button onclick="adminAction('kick')" class="w-full pixel-button text-black font-pixel py-2 px-4 text-xs">
+                    KICK PLAYER
+                  </button>
+                  <button onclick="adminAction('teleport')" class="w-full pixel-button text-black font-pixel py-2 px-4 text-xs">
+                    TELEPORT PLAYER
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4">
+              <h4 class="text-lg font-pixel text-red-300 mb-2">ADMIN CONSOLE</h4>
+              <div class="admin-console p-3">
+                <div id="admin-console" class="h-32 overflow-y-auto">
+                  > Admin console ready...
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="pixel-card p-6">
+            <h3 class="text-xl font-pixel text-yellow-400 mb-4">GAME FEATURES COMING SOON</h3>
+            <ul class="text-gray-300 space-y-2 font-retro text-lg">
               <li>• Real-time multiplayer combat</li>
               <li>• Character progression and leveling</li>
               <li>• Dungeon exploration</li>
@@ -262,6 +487,10 @@
 
     <script>
       let currentUser = null;
+      let isAdmin = false;
+      let maintenanceMode = false;
+      let accounts = [];
+      let isFirstAccount = true;
 
       function showPage(pageName) {
         // Hide all pages
@@ -280,35 +509,133 @@
         const password = document.getElementById('login-password').value;
         
         if (username && password) {
-          currentUser = username;
-          document.getElementById('player-name').textContent = username;
-          document.getElementById('welcome-message').textContent = `Welcome, ${username}!`;
-          showPage('game');
+          // Check if account exists
+          const account = accounts.find(acc => acc.username === username && acc.password === password);
+          
+          if (account) {
+            isAdmin = account.isAdmin;
+            currentUser = username;
+            document.getElementById('player-name').textContent = username;
+            
+            if (isAdmin) {
+              document.getElementById('welcome-message').textContent = `WELCOME, ${username}! (ADMIN)`;
+              document.getElementById('admin-badge').classList.remove('hidden');
+              document.getElementById('admin-panel').classList.remove('hidden');
+              logToAdminConsole('Admin login successful');
+            } else {
+              document.getElementById('welcome-message').textContent = `WELCOME, ${username}!`;
+              document.getElementById('admin-badge').classList.add('hidden');
+              document.getElementById('admin-panel').classList.add('hidden');
+            }
+            showPage('game');
+          } else {
+            alert('INVALID USERNAME OR PASSWORD!');
+          }
         }
       }
 
       function handleRegister(event) {
         event.preventDefault();
         const username = document.getElementById('register-username').value;
-        const email = document.getElementById('register-email').value;
         const password = document.getElementById('register-password').value;
         
-        if (username && email && password) {
+        if (username && password) {
+          // Check if username already exists
+          const existingAccount = accounts.find(acc => acc.username === username);
+          
+          if (existingAccount) {
+            alert('USERNAME ALREADY EXISTS! PLEASE CHOOSE A DIFFERENT USERNAME.');
+            return;
+          }
+          
+          // Create new account
+          const newAccount = {
+            username: username,
+            password: password,
+            isAdmin: isFirstAccount // First account becomes admin
+          };
+          
+          accounts.push(newAccount);
+          
+          isAdmin = isFirstAccount;
           currentUser = username;
           document.getElementById('player-name').textContent = username;
-          document.getElementById('welcome-message').textContent = `Welcome, ${username}!`;
+          
+          if (isFirstAccount) {
+            document.getElementById('welcome-message').textContent = `WELCOME, ${username}! (FIRST ADMIN)`;
+            document.getElementById('admin-badge').classList.remove('hidden');
+            document.getElementById('admin-panel').classList.remove('hidden');
+            logToAdminConsole('First account created - Admin privileges granted');
+            alert('🎉 CONGRATULATIONS! YOU ARE THE FIRST PLAYER AND HAVE BEEN GRANTED ADMIN PRIVILEGES!');
+            isFirstAccount = false;
+          } else {
+            document.getElementById('welcome-message').textContent = `WELCOME, ${username}!`;
+            document.getElementById('admin-badge').classList.add('hidden');
+            document.getElementById('admin-panel').classList.add('hidden');
+          }
+          
           showPage('game');
         }
       }
 
       function handleLogout() {
         currentUser = null;
+        isAdmin = false;
         document.getElementById('login-username').value = '';
         document.getElementById('login-password').value = '';
         document.getElementById('register-username').value = '';
-        document.getElementById('register-email').value = '';
         document.getElementById('register-password').value = '';
         showPage('home');
+      }
+
+      function adminAction(action) {
+        if (!isAdmin) return;
+        
+        const timestamp = new Date().toLocaleTimeString();
+        
+        switch(action) {
+          case 'restart':
+            logToAdminConsole(`[${timestamp}] Server restart initiated...`);
+            setTimeout(() => {
+              logToAdminConsole(`[${timestamp}] Server restart completed successfully`);
+            }, 2000);
+            break;
+          case 'maintenance':
+            maintenanceMode = !maintenanceMode;
+            logToAdminConsole(`[${timestamp}] Maintenance mode ${maintenanceMode ? 'enabled' : 'disabled'}`);
+            break;
+          case 'backup':
+            logToAdminConsole(`[${timestamp}] Creating server backup...`);
+            setTimeout(() => {
+              logToAdminConsole(`[${timestamp}] Backup completed: boredquest_backup_${Date.now()}.zip`);
+            }, 1500);
+            break;
+          case 'ban':
+            const playerToBan = prompt('Enter player name to ban:');
+            if (playerToBan) {
+              logToAdminConsole(`[${timestamp}] Player '${playerToBan}' has been banned`);
+            }
+            break;
+          case 'kick':
+            const playerToKick = prompt('Enter player name to kick:');
+            if (playerToKick) {
+              logToAdminConsole(`[${timestamp}] Player '${playerToKick}' has been kicked from the server`);
+            }
+            break;
+          case 'teleport':
+            const playerToTeleport = prompt('Enter player name:');
+            const location = prompt('Enter destination:');
+            if (playerToTeleport && location) {
+              logToAdminConsole(`[${timestamp}] Teleported '${playerToTeleport}' to ${location}`);
+            }
+            break;
+        }
+      }
+
+      function logToAdminConsole(message) {
+        const console = document.getElementById('admin-console');
+        console.innerHTML += '<br>' + message;
+        console.scrollTop = console.scrollHeight;
       }
 
       // Show home page by default
