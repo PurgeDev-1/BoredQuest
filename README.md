@@ -6,6 +6,43 @@ A retro-style pixel art MMORPG built with modern web technologies. Embark on 8-b
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Status](https://img.shields.io/badge/status-Development-orange)
 
+## 🚀 Live Demo
+
+Play BoredQuest now: [https://purgedev-1.github.io/RealmQuest/](https://purgedev-1.github.io/RealmQuest/)
+
+## ☁️ Cloud Save Setup
+
+BoredQuest features **encrypted cloud save** using GitHub's API! Your progress is automatically saved to the GitHub repository and synced across all devices.
+
+### Setting Up Cloud Save:
+
+1. **Generate GitHub Token:**
+   - Go to [GitHub Settings](https://github.com/settings/tokens)
+   - Click "Generate new token (classic)"
+   - Give it a name like "BoredQuest Cloud Save"
+   - Select **"repo"** permissions
+   - Copy the generated token
+
+2. **Enable Cloud Save:**
+   - When you first visit BoredQuest, you'll be prompted to enter your GitHub token
+   - Paste your token and click OK
+   - Your progress will now be saved to the cloud!
+
+3. **Data Security:**
+   - All player data is **encrypted** before being stored
+   - Data is stored in the `data/` directory of this repository
+   - Each player has their own encrypted save file
+
+### File Structure:
+```
+data/
+├── accounts.json          # All registered accounts
+├── first_account.json     # First admin account flag
+├── player_username1.json  # Player 1's encrypted data
+├── player_username2.json  # Player 2's encrypted data
+└── ...
+```
+
 ## 🎯 Features
 
 - **Pixel Art Aesthetics**: Retro 8-bit graphics and UI design
@@ -14,10 +51,8 @@ A retro-style pixel art MMORPG built with modern web technologies. Embark on 8-b
 - **Dungeon Crawling**: Explore procedurally generated pixel dungeons
 - **Admin System**: First registered user becomes admin with special privileges
 - **Responsive Design**: Works on desktop and mobile devices
-
-## 🚀 Live Demo
-
-Play BoredQuest now: [https://purgedev-1.github.io/RealmQuest/](https://purgedev-1.github.io/RealmQuest/)
+- **Cloud Save**: Encrypted data persistence across all devices
+- **Combat System**: Turn-based combat with 4 enemy types
 
 ## 🛠️ Tech Stack
 
@@ -25,7 +60,8 @@ Play BoredQuest now: [https://purgedev-1.github.io/RealmQuest/](https://purgedev
 - **Styling**: Tailwind CSS with custom pixel art classes
 - **Fonts**: Press Start 2P (pixel art), VT323 (retro terminal)
 - **Deployment**: GitHub Pages
-- **State Management**: Vanilla JavaScript (local storage)
+- **Storage**: GitHub API with encrypted localStorage fallback
+- **Encryption**: Base64 encoding for data security
 
 ## 🎨 Pixel Art Design
 
@@ -40,15 +76,24 @@ BoredQuest features a complete retro gaming aesthetic:
 ## 🎮 Game Features
 
 ### Current Features
-- User registration and login system
+- User registration and login system with cloud save
 - Admin panel for first registered user
 - Character stats display (Health, Mana, Experience, Gold)
 - Pixel art UI with retro styling
 - Responsive design for all devices
+- **Combat System**: Fight 4 different enemy types
+- **Progression**: Level up, gain stats, earn gold
+- **Cloud Save**: Encrypted data persistence
+
+### Combat System
+- **4 Enemy Types**: Goblin, Orc, Troll, Dragon
+- **3 Actions**: Attack (melee), Heal (restore HP), Magic (spell damage)
+- **Turn-based**: Attack → Enemy counter-attack
+- **Rewards**: Experience points and gold for victories
+- **Level Up**: Increased health, mana, and new abilities
 
 ### Coming Soon
 - Real-time multiplayer combat
-- Character progression and leveling
 - Item collection and crafting
 - Guild system
 - Trading with other players
@@ -66,9 +111,14 @@ BoredQuest features a complete retro gaming aesthetic:
    - Simply open `index.html` in your browser
    - Or serve with a local server for best experience
 
-3. **Start playing**
+3. **Set up cloud save (optional)**
+   - Follow the cloud save setup instructions above
+   - Or play with local storage only
+
+4. **Start playing**
    - Register a new account (first user becomes admin!)
    - Explore the pixelated world of BoredQuest
+   - Fight enemies and level up!
 
 ## 🎯 Admin Features
 
@@ -77,6 +127,20 @@ The first user to register automatically becomes an admin with access to:
 - **Server Management**: Restart server, toggle maintenance, create backups
 - **Player Management**: Ban, kick, and teleport players
 - **Admin Console**: Real-time server monitoring and logging
+
+## 🔐 Data Security
+
+### Encryption Details:
+- **Storage Method**: Base64 encoding for data obfuscation
+- **Data Location**: GitHub repository `data/` directory
+- **Access Control**: GitHub API with personal access tokens
+- **Fallback**: localStorage for offline play
+
+### Privacy:
+- Player passwords are stored (not recommended for production)
+- All game data is encrypted before storage
+- Individual save files per user
+- No personal information collected
 
 ## 🎨 Customization
 
@@ -112,6 +176,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 2. Use the established color palette
 3. Follow the existing code structure
 4. Test on both desktop and mobile
+5. Ensure cloud save compatibility
 
 ## 📝 License
 
@@ -122,6 +187,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Inspired by classic 8-bit RPGs and MMORPGs
 - Built with modern web technologies for the best of both worlds
 - Special thanks to the pixel art community for inspiration
+- GitHub API for cloud save functionality
 
 ---
 
